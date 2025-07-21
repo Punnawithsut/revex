@@ -4,8 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revex - Easy Revenue Record</title>
+    <link rel = "stylesheet" href = "style.css">
 </head>
 <body>
-    
+    <div class="container">
+        <div class="information">
+            <h1>Revex</h1>
+            <p>The ultimate website use to easily track 
+                and compress into csv file</p>
+        </div>
+        <div class="input-wrapper">
+            <div class="field">
+                <div class="date">
+                    <label for = "date_time_field">Date: </label>
+                    <input type = "datetime-local" id = "date_time_field">
+                </div>
+                <div class="type">
+                    <label for = "expense_type">Expense: Type</label>
+                    <select id = "expense_type" name = "expense_type">
+                        <option value = "">-- Select Type --</option>
+                        <option value = "food">Food</option>
+                        <option value = "leisure">Leisure</option>
+                        <option value = "travel">Travel</option>
+                        <option value = "other">Other</option>
+                    </select>
+                </div>
+                <div class="custom_type_container" id = "custom_type_container">
+                    <label for = "custom_type">Enter Custom Type: </label>
+                    <input type="text" id = "custom_type" name = "custom_type">
+                </div>
+                <div class="text_field">
+                    <label for = "price">Enter Price: </label>
+                    <input type="text" id = "price" name = "price">
+                    <label for = "description">Enter Description: </label>
+                    <input type="text" id = "description" name = "description">
+                </div>
+                <button id = "submit_button">Submit</button>
+                <button id = "reset_button">Reset</button>
+            </div>
+        </div>
+    </div>
+    <script src = "script.js"></script>
 </body>
 </html>
