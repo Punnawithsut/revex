@@ -18,6 +18,7 @@
                 <div class="date">
                     <label for = "date_time_field">Date: </label>
                     <input type = "datetime-local" id = "date_time_field">
+                    <input type="checkbox" id = "date_save">
                 </div>
                 <div class="type">
                     <label for = "expense_type">Expense: Type</label>
@@ -28,6 +29,7 @@
                         <option value = "travel">Travel</option>
                         <option value = "other">Other</option>
                     </select>
+                    <input type="checkbox" id = "type_save">
                 </div>
                 <div class="custom_type_container" id = "custom_type_container">
                     <label for = "custom_type">Enter Custom Type: </label>
@@ -36,13 +38,19 @@
                 <div class="text_field">
                     <label for = "price">Enter Price: </label>
                     <input type="text" id = "price" name = "price">
+                    <input type="checkbox" id = "price_save">
+                    <br>
                     <label for = "description">Enter Description: </label>
                     <input type="text" id = "description" name = "description">
                 </div>
                 <button id = "submit_button">Submit</button>
                 <button id = "reset_button">Reset</button>
                 <button id = "download_button">Download CSV</button>
+                <button id = "reset_csv">Reset CSV</button>
             </div>
+        </div>
+        <div class="visualizer">
+            <ul></ul>
         </div>
     </div>
     <script src = "script.js"></script>
