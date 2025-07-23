@@ -15,7 +15,16 @@ const price_save = document.getElementById("price_save");
 
 const table = document.getElementById("csv_table");
 
-let csvData = [["Date", "Type", "Price", "Description"]];
+let csvData = [["ID", "Date", "Type", "Price", "Description"]];
+const storedData = localStorage.getItem("csvData");
+if(storedData) {
+    try {
+        csvData = JSON.parse(storedData);
+    } catch (e) {
+        console.error("Error Parsing Stored CSV Data:", e);
+        csvData = [["ID", "Date", "Type", "Price", "Description"]];
+    }
+}
 
 updateTable();
 
@@ -42,18 +51,21 @@ submit_button.addEventListener("click", () => {
         alert("Please Enter Every Field");
         return;
     }
-    csvData.push([date, type, price, des]);
-    if(!(date_save.value === "on")) {
-        date_field.value = "";
-    } 
-    if(!(type_save.value === "on")) {
-        select.value = "";
-    } 
-    if(!(price_save.value === "on")) {
-        price_field.value = "";
-    } 
+    let curr_id = csvData.length;
+    csvData.push([curr_id, date, type, price, des]);
+    if (!date_save.checked) {
+    	date_field.value = "";
+	}
+    if (!type_save.checked) {
+    	select.value = "";
+    	custom_input.value = "";
+	}
+	if (!price_save.checked) {
+   	 	price_field.value = "";
+	}
     description.value = "";
     updateTable();
+    localStorageUpdate();
 })
 
 download_button.addEventListener("click", () => {
@@ -77,8 +89,9 @@ reset_button.addEventListener("click", () => {
 })
 
 reset_csv_button.addEventListener("click", () => {
-    csvData = [["Date", "Type", "Price", "Description"]];
+    csvData = [["ID", "Date", "Type", "Price", "Description"]];
     updateTable();
+    localStorage.removeItem("csvData");
 })
 
 function updateTable() {
@@ -93,4 +106,8 @@ function updateTable() {
         });
         table.appendChild(tr);
     });
+}
+
+function localStorageUpdate() {
+    localStorage.setItem("csvData", JSON.stringify(csvData));
 }
