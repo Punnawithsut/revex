@@ -104,8 +104,30 @@ function updateTable() {
             cellElement.innerHTML = cell;
             tr.appendChild(cellElement);
         });
+
+        if(rowIndex != 0) {
+            const deleteCell = document.createElement("td");
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "delete";
+            deleteBtn.style.cursor = "pointer";
+            deleteBtn.addEventListener("click", () => {
+                csvData.splice(rowIndex, 1);
+                reassignID();
+                updateTable();
+                localStorageUpdate();
+            })
+            deleteCell.appendChild(deleteBtn);
+            tr.appendChild(deleteCell);
+        }
+
         table.appendChild(tr);
     });
+}
+
+function reassignID() {
+    for(let i = 1; i < csvData.length; i++) {
+        csvData[i][0] = i;
+    }
 }
 
 function localStorageUpdate() {
