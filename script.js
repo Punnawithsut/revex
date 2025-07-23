@@ -13,7 +13,11 @@ const date_save = document.getElementById("date_save");
 const type_save = document.getElementById("type_save");
 const price_save = document.getElementById("price_save");
 
+const table = document.getElementById("csv_table");
+
 let csvData = [["Date", "Type", "Price", "Description"]];
+
+updateTable();
 
 select.onchange = () => {
     const custom_type = document.getElementById("custom_type_container");
@@ -49,6 +53,7 @@ submit_button.addEventListener("click", () => {
         price_field.value = "";
     } 
     description.value = "";
+    updateTable();
 })
 
 download_button.addEventListener("click", () => {
@@ -73,4 +78,19 @@ reset_button.addEventListener("click", () => {
 
 reset_csv_button.addEventListener("click", () => {
     csvData = [["Date", "Type", "Price", "Description"]];
+    updateTable();
 })
+
+function updateTable() {
+    table.innerHTML = "";
+
+    csvData.forEach((row, rowIndex) => {
+        const tr = document.createElement("tr");
+        row.forEach(cell => {
+            const cellElement = document.createElement(rowIndex == 0 ? "th" : "td");
+            cellElement.innerHTML = cell;
+            tr.appendChild(cellElement);
+        });
+        table.appendChild(tr);
+    });
+}
