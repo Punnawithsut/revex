@@ -1,0 +1,5 @@
+lev1 : #e7eabf
+lev2 : 	#d0d9a0
+lev3 : 	#95ca72
+lev4 : 	#558343
+lev5 : 	#558343
