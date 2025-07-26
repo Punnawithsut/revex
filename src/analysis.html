@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revex - Easy Revenue Record</title>
     <link rel = "stylesheet" href = "analysis_style.css">
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
 </head>
 <body>
     <nav>
@@ -12,7 +15,15 @@
         <a class = "between" href="../CSV_creater.html">CSV_creater</a>
         <a href="analysis.html">Analysis</a>
     </nav>
-    analyze
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="ai-advice-container" style="margin: 20px;">
+        <h2>Ask AI for Expense Advice</h2>
+        <textarea id="userPrompt" rows="4" cols="50" placeholder="Enter your prompt here..."></textarea><br>
+        <button id="getAdviceBtn">Get Advice</button>
+        <pre id="aiResult"></pre>
+    </div>
     <script src = "analysis.js"></script>
 </body>
 </html>
