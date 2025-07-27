@@ -45,32 +45,30 @@ if (!storedData) {
 }
 
 async function getAIAdvice(prompt) {
-    const API_KEY = "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";
+  try {
+    const response = await fetch("https://api.pawan.krd/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "mistralai/Mistral-7B-Instruct-v0.1",
+        messages: [
+          { role: "system", content: "You are a helpful assistant that gives expense advice based on prompts." },
+          { role: "user", content: prompt }
+        ]
+      })
+    });
 
-    try {
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${API_KEY}`,
-                "Content-Type": "application/json"
-            },
-            body : JSON.stringify({
-                model: "meta-llama/llama-3-8b-instruct",
-                messages : [
-                    {role: "user", content: prompt}
-                ]
-            })
-        });
-
-        if(!response.ok) {
-            throw new Error(`API error: ${response.status} ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        return data.choices?.[0]?.message?.content || "No advice received.";
-    } catch (e) {
-        return `Error: ${e.message}`;
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
     }
+
+    const data = await response.json();
+    return data.choices?.[0]?.message?.content || "No advice received.";
+  } catch (e) {
+    return `Error: ${e.message}`;
+  }
 }
 
 document.getElementById("getAdviceBtn").onclick = async () => {
